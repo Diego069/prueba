@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">catalogo</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [routerLink]="['/']" default-href="#">Perfil</ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-button color="danger">anterior</ion-button>
+  </ion-buttons>
+  <ion-title></ion-title>
+  <ion-buttons slot="end">
+    <ion-button>siguiente</ion-button>
+  </ion-buttons>
+</ion-toolbar>
+<ion-content>
+  <ion-grid>
+    <ion-row *ngFor="let p of this.productosService.obtenerProductos()?.products">
+      <ion-col>
+        <ion-card [routerLink]="['/Perfil']" [queryParams]='{categoria:p.category,descuento:p.discountPercentage,marca:p.brand,imagenes:p.images,stock:p.stock,rating:p.rating,descripcion:p.description,title:p.title,precio:p.price}'>
+          <img [src]="p.thumbnail" alt="" loading="lazy">
+          <ion-card-header>{{p.title}}</ion-card-header>
+          <ion-card-content>
+            <ion-label> {{p.category}}</ion-label>
+            <br>
+            <ion-label> {{p.brand}}</ion-label>
+            <br>
+            <ion-label> {{p.price}}</ion-label>
+            <br>
+            <ion-badge slot="start" color="danger" [color]="p.stock<10?'danger':'primary'">{{p.stock}}</ion-badge>
+            <br>
+            <ion-label> {{p.brand}}</ion-label>
+            <br>
+            <ion-label> {{p.rating}}</ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
